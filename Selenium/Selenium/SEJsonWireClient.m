@@ -277,12 +277,12 @@
 // POST /session/:sessionId/frame
 -(void) postSetFrame:(id)name session:(NSString*)sessionId error:(NSError**)error
 {
-	if ([name isKindOfClass:[SEWebElement class]])
-	{
-		name = (SEWebElement*)[name elementJson];
-	}
-	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/frame", self.httpCommandExecutor, sessionId];
-	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: name, @"name", nil];
+    // check param type
+    if ([name isKindOfClass:[SEWebElement class]]){
+        name = (SEWebElement*)[name elementJson];
+    }
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/frame", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: name, @"id", nil];
 	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
